@@ -43,9 +43,6 @@ def main():
     if args.write:
         write_api = client.write_api(write_options=SYNCHRONOUS)
 
-        if args.count:
-            print(args.count)
-
         i = 0
         while True:
             if args.count and i == args.count:
