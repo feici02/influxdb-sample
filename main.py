@@ -1,5 +1,6 @@
 import argparse
 import configparser
+import datetime
 
 import influxdb_client
 import time
@@ -28,10 +29,15 @@ def write_influxdb(write_api, org, bucket, i):
     point = (
         Point("testdata")
         .tag("tagname1", "tagvalue1")
+        .tag("tagname2", "tagvalue2")
+        .tag("tagname3", "tagvalue3")
         .field("field1", i)
         .field("field2", "hello" + str(i))
         .field("field3", True if i % 2 == 0 else False)
+        .time(datetime.datetime.now())
     )
+    print(point)
+
     write_api.write(org=org, bucket=bucket, record=point)
 
 
