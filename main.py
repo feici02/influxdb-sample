@@ -27,11 +27,9 @@ def parse_args():
 
 def write_influxdb(write_api, org, bucket, i, precision):
     point = (
-        Point("xwang2")
+        Point("testdata")
         .tag("tagname1", "tagvalue1")
-        .tag("tagname2", 2.0)
-        .tag("tagname3", 3)
-        .tag("tagname4", True)
+        .tag("tagname2", "tagvalue2")
         .field("field1", i)
         .field("field2", "hello" + str(i))
         .field("field3", True if i % 2 == 0 else False)
@@ -43,7 +41,6 @@ def write_influxdb(write_api, org, bucket, i, precision):
     elif precision == "ms":
         point.time(int(time.time_ns() / 1000000), write_precision=WritePrecision.MS)
     elif precision == "us":
-        pass
         point.time(int(time.time_ns() / 1000), write_precision=WritePrecision.US)
     elif precision == "ns":
         point.time(int(time.time_ns()), write_precision=WritePrecision.NS)
